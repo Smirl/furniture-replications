@@ -5,8 +5,9 @@
     <ul class="lightSliderItems">
       {{ range .Site.Pages }}
         {{ with .Resources.GetMatch "feature.jpg" }}
-        <li style="background: url({{ .RelPermalink }});">
-          <p>{{ .Title }}</p>
+        {{- $image := .Fill "930x340" -}}
+        <li style="background: url({{  $image.RelPermalink }});">
+          <p>{{  $image.Title }}</p>
         </li>
         {{ end }}
       {{ end }}
