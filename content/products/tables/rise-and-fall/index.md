@@ -1,5 +1,8 @@
 ---
 title: "Rise and Fall Table"
+resources:
+- title: "Unique Tables"
+  src: "feature.jpg"
 ---
 Used to display clothing, or as an executive's office desk.
 <!--more-->

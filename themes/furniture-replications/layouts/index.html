@@ -3,15 +3,13 @@
 <div id="feature">
   <div id="featureContent" class="box_round box_first">
     <ul class="lightSliderItems">
-      <li style="background: url(http://www.furniturereplications.com/wp-content/uploads/2011/11/f3.jpg);">
-        <p>Unique Tables</p>
-      </li>
-      <li style="background: url(http://www.furniturereplications.com/wp-content/uploads/2011/11/f2.jpg);">
-        <p>Bespoke Mirrors</p>
-      </li>
-      <li style="background: url(http://www.furniturereplications.com/wp-content/uploads/2011/11/f1.jpg);">
-        <p>Check out our <br />range of stools</p>
-      </li>
+      {{ range .Site.Pages }}
+        {{ with .Resources.GetMatch "feature.jpg" }}
+        <li style="background: url({{ .RelPermalink }});">
+          <p>{{ .Title }}</p>
+        </li>
+        {{ end }}
+      {{ end }}
     </ul>
   </div>
 </div>
