@@ -1,0 +1,5 @@
+{{ if .Context.Site.Params.template_debugging }}
+<div style="width: 100%; background-color: lightgrey; color: black; font-size: 20px; font-family:'Courier New', Courier, monospace; padding: 10px;">
+    Template: <span>{{ .Template }}</span> - Kind: <span>{{ .Context.Kind }}</span><br>
+</div>
+{{ end }}

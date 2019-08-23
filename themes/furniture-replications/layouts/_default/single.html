@@ -1,0 +1,55 @@
+{{ define "main" }}
+<main id="content" class="boxGradient box_round box_first">
+  <article>
+    <header>
+      <h1>{{.Title}}</h1>
+    </header>
+    
+    <div id="breadCrumbs" class="linkText">
+    </div>
+
+    <div id="imageContainer">
+      {{ with .Resources.GetMatch "main.*" }}
+        {{ template "image" .}}
+      {{ else }}
+        {{ range first 1 (shuffle (where .Site.RegularPages "Section" "products")) }}
+          {{ with .Resources.GetMatch "main.*" }}
+            {{ template "image" .}}
+          {{ end }}
+        {{ end }}
+      {{ end }} 
+      {{ range .Resources.Match "image*" }}
+        {{ template "image" .}}
+      {{ end }}
+    </div>
+
+    <div id="rightContainer" class="normal box_shadow_light box_round">
+      {{ .Content }}
+      {{ $related := .Site.RegularPages.Related . | first 5 }}
+      {{ with $related }}
+      <h3>See Also</h3>
+      <ul>
+        {{ range . }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+  </article>
+</main>
+{{ end }}
+
+{{ define "image" }}
+  {{- if or (in .Name `hori`) (in .Name `main`) -}}
+    {{- $image := .Fill "500x300" -}}
+    <div class="box_shadow_light hori"><img src="{{ $image.RelPermalink }}"></div>
+  {{- else -}}
+    {{- $image := .Fill "240x335" -}}
+    <div class="box_shadow_light port"><img src="{{ $image.RelPermalink }}"></div>
+  {{- end -}}
+{{ end }}
+
+
+{{ define "template" }}
+  {{ partial "template.html" (dict "Context" . "Template" "layouts/_default/single.html") }}
+{{ end }}

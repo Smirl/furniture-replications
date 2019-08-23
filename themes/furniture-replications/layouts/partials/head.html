@@ -1,0 +1,15 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Furniture Replications | Creating bespoke replication furniture</title>
+<link rel="SHORTCUT ICON" href="/favicon.ico" />
+
+{{ $fonts := resources.Get "css/fonts.css" -}}
+{{- $style := resources.Get "css/style.css" -}}
+{{- $lightslider := resources.Get "css/lightslider.css" -}}
+{{- $css := slice $fonts $lightslider $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+{{ $jquery := resources.Get "js/jquery-1.12.4.js" -}}
+{{- $lightslider := resources.Get "js/lightslider.js" -}}
+{{- $js := slice $jquery $lightslider | resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

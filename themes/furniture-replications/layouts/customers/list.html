@@ -1,0 +1,43 @@
+{{ define "main" }}
+<main id="welcomeBox" class="boxGradient box_round box_first normal">
+    <article>
+        <header>
+            <h1>{{.Title}}</h1>
+        </header>
+        <!-- "{{.Content}}" pulls from the markdown content of the corresponding _index.md -->
+        {{.Content}}
+    </article>
+
+    <!-- Featured customers -->
+    {{ range where .Pages ".Params.featured" true }}
+      <div class="custCase box_round box_shadow_light">
+        {{ $color := .Params.background_color }}
+        {{ with .Resources.GetMatch "main.*" }}
+        <div class="box_shadow" style="background-color: {{ $color }};"><img src="{{ .RelPermalink }}" alt="{{ .Title }}"></div>
+        {{ end }}
+        <h2>{{ .Title }}</h2>
+        <p>{{ .Content }}</p>
+      </div>
+    {{ end }}
+
+    <!-- Rest of the customers -->
+    {{ range (.Pages.GroupByParam "type").Reverse }}
+    <h2 class="space">{{ .Key }}</h2>
+      {{ range .Pages }}
+      <div class="cust">
+        <div class="custImg">
+          {{ $color := .Params.background_color }}
+          {{ with .Resources.GetMatch "main.*" }}
+          <div class="box_round box_shadow_light" style="background-color: {{ $color }};"><img src="{{ .RelPermalink }}" alt="{{ .Title }}"></div>
+          {{ end }}
+        </div>
+        <p>{{ .Summary }}</p>
+      </div>
+      {{ end }}
+    {{ end }}
+</main>
+{{ end }}
+
+{{ define "template" }}
+  {{ partial "template.html" (dict "Context" . "Template" "layouts/customers/list.html") }}
+{{ end }}

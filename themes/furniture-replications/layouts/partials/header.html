@@ -1,0 +1,17 @@
+<header id="header">
+  <nav id="nav">
+    <ul class="normal">
+      {{ range .Site.Menus.main }}
+          <li class="{{ if (or ($.IsMenuCurrent `main` .) (eq $.Section (lower .Name))) }}active{{ end }}">
+            <a href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a>
+          </li>
+      {{ end }}
+    </ul>
+  </nav>
+  <div id="logo"><a href="{{ `/` | relURL }}" title="Home Page"><img src="{{ `images/logo.png` | relURL }}"/></a></div>
+  <div id="logoText">
+    <a href="{{ `/` | relURL }}" title="Home Page">
+      <h1>furniture replications</h1>
+    </a>
+  </div>
+</header>

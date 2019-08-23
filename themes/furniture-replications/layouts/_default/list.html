@@ -1,0 +1,20 @@
+{{ define "main" }}
+<main id="welcomeBox" class="boxGradient box_round box_first normal">
+    <article>
+        <header>
+            <h1>{{.Title}}</h1>
+        </header>
+        {{.Content}}
+    </article>
+</main>
+<div style="clear:both;height:20px;"></div>
+
+<section id="content" class="boxGradient box_round">
+  {{ partial "product_list.html" . }}
+</section>
+<div style="clear:both; padding:0; margin:0;"></div>
+{{ end }}
+
+{{ define "template" }}
+  {{ partial "template.html" (dict "Context" . "Template" "layouts/_default/list.html") }}
+{{ end }}

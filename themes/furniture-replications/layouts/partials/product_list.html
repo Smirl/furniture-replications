@@ -1,0 +1,28 @@
+{{ range .Pages}}
+  <div class="itemBox long normal">
+    <h2><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></h2>
+    <ul class="fade box_shadow_light">
+      {{ $section := . }}
+      {{ range first 5 .Pages }}
+        {{ template "item" (dict "Page" . "Link" $section.RelPermalink)}}
+      {{ else }}
+        {{ template "item" (dict "Page" . "Link" .RelPermalink)}}
+      {{ end }}
+    </ul>
+    <div class="linkText"><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></div>
+    <p>{{ .Summary }}</p>
+  </div>
+{{ end }}
+
+<script>
+  $(document).ready(function() {
+    $(".fade").lightSlider({item: 1, auto: true, loop: true, controls: false, autoWidth: true, mode: "fade", pager: false, pause: 3000, speed: 1000});
+  });
+</script>
+
+{{ define "item" }}
+  {{ with .Page.Resources.GetMatch `main.*` }}
+    {{- $image := .Fill "500x300" -}}
+    <li><a href="{{ $.Link }}" title="{{ .Title }}"><img src="{{ $image.RelPermalink }}"></a></li>
+  {{ end }}
+{{ end }}

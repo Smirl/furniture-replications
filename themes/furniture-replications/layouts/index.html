@@ -1,0 +1,43 @@
+{{ define "main" }}
+
+<div id="feature">
+  <div id="featureContent" class="box_round box_first">
+    <ul class="lightSliderItems">
+      <li style="background: url(http://www.furniturereplications.com/wp-content/uploads/2011/11/f3.jpg);">
+        <p>Unique Tables</p>
+      </li>
+      <li style="background: url(http://www.furniturereplications.com/wp-content/uploads/2011/11/f2.jpg);">
+        <p>Bespoke Mirrors</p>
+      </li>
+      <li style="background: url(http://www.furniturereplications.com/wp-content/uploads/2011/11/f1.jpg);">
+        <p>Check out our <br />range of stools</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div id="welcomeBox" class="boxGradient normal box_round">
+  {{ .Content }}
+</div>
+<div style="clear:both;height:20px;"></div>
+
+
+<div id="content" class="boxGradient box_round">
+{{ with .Site.GetPage "/products" }}
+  {{ partial "product_list.html" . }}
+{{ end }}
+</div>
+<div style="clear:both; padding:0; margin:0;"></div>
+
+<script>
+    $(document).ready(function() {
+      $("#featureContent .lightSliderItems").lightSlider({item: 1, auto: true, loop: true});
+    });
+</script>
+{{ end }}
+
+
+{{ define "template" }}
+  {{ partial "template.html" (dict "Context" . "Template" "layouts/index.html") }}
+{{ end }}
