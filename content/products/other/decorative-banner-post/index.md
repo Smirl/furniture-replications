@@ -1,0 +1,3 @@
+---
+title: "Decorative Banner Post"
+---
