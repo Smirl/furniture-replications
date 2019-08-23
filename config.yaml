@@ -1,0 +1,34 @@
+baseURL: "https://furniturereplications.com/"
+languageCode: "en-us"
+title: "Furniture Replications | Creating bespoke replication furniture"
+theme: "furniture-replications"
+googleAnalytics: UA-5357036-4
+
+params:
+  template_debugging: false
+
+related:
+  threshold: 80
+  includeNewer: false
+  toLower: false
+  indices:
+  - name: title
+    weight: 80
+  - name: parent
+    weight: 80
+  - name: keywords
+    weight: 50
+  - name: date
+    weight: 10
+
+disableKinds:
+- taxonomy
+- taxonomyTerm
+
+outputs:
+  page:
+    - HTML
+  home:
+    - HTML
+  section:
+    - HTML
