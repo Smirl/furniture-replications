@@ -2,11 +2,11 @@
   font-family: 'Goudy Bookletter 1911';
   font-style: normal;
   font-weight: 400;
-  src: local('Goudy Bookletter 1911'), local('GoudyBookletter1911'), url(http://fonts.gstatic.com/s/goudybookletter1911/v9/sykt-z54laciWfKv-kX8krex0jDiD2HbY6IJshzT.ttf) format('truetype');
+  src: local('Goudy Bookletter 1911'), local('GoudyBookletter1911'), url(https://fonts.gstatic.com/s/goudybookletter1911/v9/sykt-z54laciWfKv-kX8krex0jDiD2HbY6IJshzT.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 100;
-  src: local('Raleway Thin'), local('Raleway-Thin'), url(http://fonts.gstatic.com/s/raleway/v14/1Ptsg8zYS_SKggPNwE44TYFv.ttf) format('truetype');
+  src: local('Raleway Thin'), local('Raleway-Thin'), url(https://fonts.gstatic.com/s/raleway/v14/1Ptsg8zYS_SKggPNwE44TYFv.ttf) format('truetype');
 }

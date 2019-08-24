@@ -3,7 +3,7 @@
     <h2><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></h2>
     <ul class="fade box_shadow_light">
       {{ $section := . }}
-      {{ range first 5 .Pages }}
+      {{ range first 3 .Pages }}
         {{ template "item" (dict "Page" . "Link" $section.RelPermalink)}}
       {{ else }}
         {{ template "item" (dict "Page" . "Link" .RelPermalink)}}
