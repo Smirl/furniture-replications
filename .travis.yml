@@ -10,9 +10,8 @@ before_install:
   -in deploy/kubeconfig.enc -out deploy/kubeconfig -d
 install:
 - curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kubectl
-  && chmod +x kubectl && mv kubectl /usr/local/bin/
-- curl https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz | tar -xvz && mv linux-amd64/helm
-  /usr/local/bin/
+  && chmod +x kubectl
+- curl https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz | tar -xvz && mv linux-amd64/helm ./helm
 script:
 - docker build -t registry.smirlwebs.com/smirl/furniture-replications:$VERSION .
 after_success:
