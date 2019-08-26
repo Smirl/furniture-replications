@@ -6,6 +6,9 @@ metadata:
   namespace: furniture-replications
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: furniture-replications
   strategy:
     type: RollingUpdate
     rollingUpdate:
