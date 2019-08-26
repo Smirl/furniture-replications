@@ -1,0 +1,25 @@
+language: generic
+env:
+  global:
+  - VERSION="1.0.$TRAVIS_BUILD_NUMBER"
+  - secure: dz8U9AHA1GXeK88gRJMuXClqWxWYlUUKTmxdfziQpiNEywZqYDYGGjJo3ufJejjuXg6KUjCRgcUuXuPmtsUNu26mTwDMIPcCI+Fbh4Bj8nF9i497CVmi4CQRqwjtP6kSqDs8kNcXjrz5VUiDoHlQ7mAw1XiK6D+16aggMGcnKCACyJqRfqYRPsyhzWIheI/aLi2aQlzrOSSoPKASBP3lDU/NIjRlUcCWeGrXkRHArB+cOcSjSLNPf5TCodnuS81GHbyy1+hJpbD0UEZMhT4AUatYSDQVWW0nfdZVAB3DPI/HfLyQassoDcEJweLTCrxULD3uspzNWNk9sXlUJqMVegvlM9py/TuitNQMUirvwPbDhjVzvy+tUWKeOZGwwjgxIGOnhZvpUQxnTQrKu9p2Z1wKss46/X9/yoCSbwYAlRkdGDIUc22cQqdLJXkBIEUFFG5g/bzXEwo4JbTuWnxX3PEKxmW/Lfxe5YlS4mcfl1o+Z44N8zjg1tzswoE8dWj6LRXIR4wcmQ4QOXhkBjA72cugpbFfL/jHPr7Y6CgTlYEl4L3jL09f+qplXUcTirPrxBZMTKfQUS54zqxap+SGQGvRAilIMU41xLGnEWkM78oynBelYgvYJ9kAe5PXyI+uE+v/jZd6Z9cYbOa9v3dDE2tfNdDF3esiEA8BVuhn7p4=
+services:
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_e4f343148096_key -iv $encrypted_e4f343148096_iv
+  -in deploy/kubeconfig.enc -out deploy/kubeconfig -d
+install:
+- curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.15.3/bin/linux/amd64/kubectl
+  && chmod +x kubectl && mv kubectl /usr/local/bin/
+- curl https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz | tar -xvz && mv linux-amd64/helm
+  /usr/local/bin/
+script:
+- docker build -t registry.smirlwebs.com/smirl/furniture-replications:$VERSION .
+after_success:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin registry.registry.com
+- docker push registry.smirlwebs.com/smirl/furniture-replications:$VERSION
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: master
