@@ -1,5 +1,7 @@
 # Furniture Replications
 
+[![Build Status](https://travis-ci.org/Smirl/furniture-replications.svg?branch=master)](https://travis-ci.org/Smirl/furniture-replications)
+
 This is a port of the wordpress theme to hugo for furniturereplications.com
 
 ## Slider
@@ -40,6 +42,21 @@ To create the service account and permissions, a cluster-admin needs to apply
 the following:
 
     kubectl apply -f deploy/serviceaccount.yaml
+
+There are a few secrets setup for travis ci. `deploy/kubeconfig.enc` checked in
+to the repo, however it's unencrypted form `deploy/kubeconfig` is not. This
+can be recreated with:
+
+    kubectl config set-cluster travis --server=XXXX --certificate-authority=./deploy/ca.crt --embed-certs
+    kubectl config set-credentials travis --token XXXXXX
+    kubectl config set-context travis --cluster=travis --user=travis --namespace furniture-replications
+    kubectl config use-context travis
+    kubectl config view --raw --minify > deploy/kubeconfig
+    travis encrypt-file deploy/kubeconfig deploy/kubeconfig.enc --add
+
+For the registry:
+
+    travis encrypt DOCKER_PASSWORD=XXXXX --add
 
 ## Secrets
 
