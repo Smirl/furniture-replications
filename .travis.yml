@@ -1,4 +1,4 @@
-language: generic
+language: minimal
 env:
   global:
   - VERSION="1.0.$TRAVIS_BUILD_NUMBER"
