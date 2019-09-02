@@ -1,12 +1,12 @@
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Furniture Replications | Creating bespoke replication furniture</title>
 <link rel="SHORTCUT ICON" href="/favicon.ico" />
 
 {{ $fonts := resources.Get "css/fonts.css" -}}
 {{- $style := resources.Get "css/style.css" -}}
 {{- $lightslider := resources.Get "css/lightslider.css" -}}
-{{- $css := slice $fonts $lightslider $style | resources.Concat "css/bundle.css" | resources.Minify | resources.Fingerprint -}}
+{{- $css := slice $fonts $lightslider $style | resources.Concat "css/bundle.css" | resources.PostCSS | resources.Minify | resources.Fingerprint -}}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
 {{ $jquery := resources.Get "js/jquery-1.12.4.js" -}}
