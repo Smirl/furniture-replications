@@ -4,11 +4,22 @@ auto_deploy: false
 admin_path: "/static/admin"
 webhook_url: 
 sections:
-- type: directory
-  path: content
+- type: heading
   label: Pages
-  create: all
-  match: "*"
+- type: document
+  path: content/_index.md
+  label: Home
+  match: "**/*"
+- type: document
+  path: content/capabilities.md
+  label: Capabilities
+  match: "**/*"
+- type: document
+  path: content/contact.md
+  label: Contact
+  match: "**/*"
+- type: heading
+  label: Items
 - type: directory
   path: content/products
   label: Products
