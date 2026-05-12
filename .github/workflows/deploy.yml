@@ -45,6 +45,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v7
         with:
+          context: .
           push: ${{ github.event_name == 'release' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
